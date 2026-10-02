@@ -3,10 +3,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Price List 2026 - Order</title>
 <style>
-:root{--bg:#fff;--fg:#1b1b1b;--mut:#777;--line:#e6e6e6;--acc:#c2410c;--card:#f7f7f6;--onacc:#fff;
+:root{--bg:#2d336b;--fg:#fff;--mut:#fff;--line:#777ba7;--acc:#454b83;--card:#3b4177;--onacc:#fff;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141414;--fg:#f0f0f0;--mut:#9a9a9a;--line:#2c2c2c;--acc:#f97316;--card:#1e1e1e;--onacc:#111}}
-:root[data-theme="dark"]{--bg:#141414;--fg:#f0f0f0;--mut:#9a9a9a;--line:#2c2c2c;--acc:#f97316;--card:#1e1e1e;--onacc:#111}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2d336b;--fg:#fff;--mut:#fff;--line:#777ba7;--acc:#454b83;--card:#252a5a;--onacc:#2d336b}}
+:root[data-theme="dark"]{--bg:#2d336b;--fg:#fff;--mut:#fff;--line:#777ba7;--acc:#454b83;--card:#252a5a;--onacc:#2d336b}
 html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.4 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -51,6 +51,21 @@ main{padding:0 12px 120px}
 .sec{flex-wrap:wrap}.sec button{flex:1 1 30%;padding:13px 8px}
 .gate{align-items:flex-end;padding:0}.gate .sheet{max-width:none;border-radius:18px 18px 0 0}
 }
+body{background:linear-gradient(145deg,#fff2f2 0%,#e9eafb 45%,#2d336b 145%);background-attachment:fixed}
+header{background:linear-gradient(110deg,#2d336b,#454b83 58%,#777ba7);border-radius:0 0 18px 18px;color:#fff2f2}
+h1{background:linear-gradient(90deg,#2d336b,#555b91);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{display:flex;align-items:center;gap:7px}
+h2:before{content:"🎆";font-size:16px}
+.row{background:rgba(255,255,255,.72);border:1px solid rgba(255,190,164,.5);border-radius:14px;margin:7px 0;padding:10px 12px;box-shadow:0 4px 12px rgba(110,64,96,.08)}
+.pr{color:#fff}
+.add,.ctl button:not(.add){box-shadow:0 3px 0 rgba(90,40,100,.13)}
+.add{background:linear-gradient(135deg,#454b83,#2d336b);color:#fff}
+.bar button,.send{background:linear-gradient(100deg,#2d336b,#454b83 65%,#656b9c);box-shadow:0 7px 18px rgba(45,51,107,.25)}
+.sheet{background:linear-gradient(160deg,var(--bg),#f7e9ef 72%,#e9eafb)}
+.nm b:before{content:"🎇 ";font-size:13px}
+
+@media (prefers-color-scheme:dark){body{background:linear-gradient(145deg,#2d336b,#3b4177 55%,#252a5a);background-attachment:fixed}header{background:linear-gradient(110deg,#2d336b,#454b83 55%,#252a5a)}.row{background:rgba(45,51,107,.9);border-color:#777ba7}.add{background:linear-gradient(135deg,#454b83,#2d336b);color:#fff2f2}.sheet{background:linear-gradient(160deg,var(--bg),#383e75 72%,#252a5a)}}
+body,header,h1,h1 span,h2,h2 em,.hi,.nm b,.nm small,small,.pr,.ctl span,.tot,.sheet h3,.sheet p,input,input::placeholder,button,.send,.bar button,a{color:#fff!important}
 [hidden]{display:none!important}
 </style></head><body>
 <main>
@@ -77,7 +92,7 @@ D.forEach(c=>c.i.forEach(x=>I[x[0]]=x));
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 const ctl=s=>Q[s]?`<button data-a="-">&minus;</button><span>${Q[s]}</span><button data-a="+">+</button>`:`<button class="add" data-a="+">Add</button>`;
 $("#list").innerHTML=D.map(c=>`<section><h2>${esc(c.t)}${c.nd?"<em>No discount</em>":""}</h2>`+c.i.map(x=>
-`<div class="row" data-sl="${x[0]}"><div class="nm"><b>${esc(x[1])}</b><small>${x[2]?esc(x[2])+" · ":""}${esc(x[4])}</small></div><div class="pr">${x[3]===null?"—":"₹"+x[3]}</div><div class="ctl">${x[3]?ctl(x[0]):"<small>On request</small>"}</div></div>`).join("")+"</section>").join("");
+`<div class="row" data-sl="${x[0]}"><div class="nm"><b>#${x[0]} · ${esc(x[1])}</b><small>${x[2]?esc(x[2])+" · ":""}${esc(x[4])}</small></div><div class="pr">${x[3]===null?"—":"₹"+x[3]}</div><div class="ctl">${x[3]?ctl(x[0]):"<small>On request</small>"}</div></div>`).join("")+"</section>").join("");
 function sum(){let n=0,t=0;for(const s in Q){n+=Q[s];t+=Q[s]*I[s][3]}return{n,t}}
 function msg(){const l=Object.keys(Q).map((s,i)=>`${i+1}. ${I[s][1]} - ${Q[s]} x ₹${I[s][3]} = ₹${Q[s]*I[s][3]}`);
 return `*New Order*\nName: ${who}\n\n${l.join("\n")}\n\n*Total: ₹${sum().t}*`}
